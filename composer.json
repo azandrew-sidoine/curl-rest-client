@@ -1,0 +1,26 @@
+{
+    "name": "drewlabs/curl-rest-client",
+    "description": "Built on top of curl client library, it offers REST supported HTTP verbs for sending request to backend service.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Drewlabs\\Curl\\REST\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "azandrew-sidoine",
+            "email": "asmyns.platonnas29@gmail.com"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+        "drewlabs/curl-client": "^0.2.0"
+    },
+    "require-dev": {
+        "donatj/mock-webserver": "^2.6",
+        "phpunit/phpunit": ">=6.0"
+    }
+}
