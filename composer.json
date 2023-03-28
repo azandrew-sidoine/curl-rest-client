@@ -17,7 +17,7 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "drewlabs/curl-client": "^0.2.0"
+        "drewlabs/curl-client": "^0.3.0"
     },
     "require-dev": {
         "donatj/mock-webserver": "^2.6",

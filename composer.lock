@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3eadf089d80c2a0b574585f01078c356",
+    "content-hash": "aefc5f87d01d1973b9479c362cb7ef68",
     "packages": [
         {
             "name": "drewlabs/curl-client",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/azandrew-sidoine/drewlabs-curl-client.git",
-                "reference": "85cc6fb8b6c7d85f904551c6abe7882cd76e57b5"
+                "reference": "75dfc6efc5084b6ad6a61a48616cd95a2af21e1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/azandrew-sidoine/drewlabs-curl-client/zipball/85cc6fb8b6c7d85f904551c6abe7882cd76e57b5",
-                "reference": "85cc6fb8b6c7d85f904551c6abe7882cd76e57b5",
+                "url": "https://api.github.com/repos/azandrew-sidoine/drewlabs-curl-client/zipball/75dfc6efc5084b6ad6a61a48616cd95a2af21e1e",
+                "reference": "75dfc6efc5084b6ad6a61a48616cd95a2af21e1e",
                 "shasum": ""
             },
             "require": {
@@ -26,15 +26,7 @@
             },
             "require-dev": {
                 "donatj/mock-webserver": "^2.5",
-                "drewlabs/psr7": "^0.1.1",
-                "drewlabs/psr7-stream": "^1.2",
-                "phpunit/phpunit": ">=6.0",
-                "psr/http-client": "^1.0"
-            },
-            "suggest": {
-                "drewlabs/psr7": "Psr7 implementation require for Psr18Client curl client usage",
-                "drewlabs/psr7-stream": "Psr7 stream required for Psr18Client curl client usage",
-                "psr/http-client": "Expected to use Psr18Client curl client"
+                "phpunit/phpunit": ">=6.0"
             },
             "type": "library",
             "autoload": {
@@ -59,9 +51,74 @@
             ],
             "support": {
                 "issues": "https://github.com/azandrew-sidoine/drewlabs-curl-client/issues",
-                "source": "https://github.com/azandrew-sidoine/drewlabs-curl-client/tree/v0.2.0"
+                "source": "https://github.com/azandrew-sidoine/drewlabs-curl-client/tree/v0.3.0"
             },
-            "time": "2023-03-24T12:34:24+00:00"
+            "time": "2023-03-28T12:20:14+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "donatj/mock-webserver",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/donatj/mock-webserver.git",
+                "reference": "389fe0269970f80bfa89f064c8b7203370f63a7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/donatj/mock-webserver/zipball/389fe0269970f80bfa89f064c8b7203370f63a7c",
+                "reference": "389fe0269970f80bfa89f064c8b7203370f63a7c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-sockets": "*",
+                "php": ">=7.1",
+                "ralouphie/getallheaders": "~2.0 || ~3.0"
+            },
+            "require-dev": {
+                "corpus/coding-standard": "^0.6.0",
+                "donatj/drop": "^1.0",
+                "ext-curl": "*",
+                "friendsofphp/php-cs-fixer": "^3.1",
+                "phpunit/phpunit": "~7|~9",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "donatj\\MockWebServer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jesse G. Donat",
+                    "email": "donatj@gmail.com",
+                    "homepage": "https://donatstudios.com",
+                    "role": "Lead"
+                }
+            ],
+            "description": "Simple mock web server for unit testing",
+            "support": {
+                "issues": "https://github.com/donatj/mock-webserver/issues",
+                "source": "https://github.com/donatj/mock-webserver/tree/v2.6.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/donatj/15",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/donatj",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-11-28T11:26:19+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -707,6 +764,50 @@
                 }
             ],
             "time": "2023-03-27T11:46:33+00:00"
+        },
+        {
+            "name": "ralouphie/getallheaders",
+            "version": "3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/getallheaders.git",
+                "reference": "120b605dfeb996808c31b6477290a714d356e822"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
+                "reference": "120b605dfeb996808c31b6477290a714d356e822",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5 || ^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/getallheaders.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "A polyfill for getallheaders.",
+            "support": {
+                "issues": "https://github.com/ralouphie/getallheaders/issues",
+                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+            },
+            "time": "2019-03-08T08:55:37+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -1666,115 +1767,6 @@
                 }
             ],
             "time": "2021-07-28T10:34:58+00:00"
-        }
-    ],
-    "packages-dev": [
-        {
-            "name": "donatj/mock-webserver",
-            "version": "v2.6.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/donatj/mock-webserver.git",
-                "reference": "389fe0269970f80bfa89f064c8b7203370f63a7c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/donatj/mock-webserver/zipball/389fe0269970f80bfa89f064c8b7203370f63a7c",
-                "reference": "389fe0269970f80bfa89f064c8b7203370f63a7c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-sockets": "*",
-                "php": ">=7.1",
-                "ralouphie/getallheaders": "~2.0 || ~3.0"
-            },
-            "require-dev": {
-                "corpus/coding-standard": "^0.6.0",
-                "donatj/drop": "^1.0",
-                "ext-curl": "*",
-                "friendsofphp/php-cs-fixer": "^3.1",
-                "phpunit/phpunit": "~7|~9",
-                "squizlabs/php_codesniffer": "^3.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "donatj\\MockWebServer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jesse G. Donat",
-                    "email": "donatj@gmail.com",
-                    "homepage": "https://donatstudios.com",
-                    "role": "Lead"
-                }
-            ],
-            "description": "Simple mock web server for unit testing",
-            "support": {
-                "issues": "https://github.com/donatj/mock-webserver/issues",
-                "source": "https://github.com/donatj/mock-webserver/tree/v2.6.1"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/donatj/15",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/donatj",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-11-28T11:26:19+00:00"
-        },
-        {
-            "name": "ralouphie/getallheaders",
-            "version": "3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ralouphie/getallheaders.git",
-                "reference": "120b605dfeb996808c31b6477290a714d356e822"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
-                "reference": "120b605dfeb996808c31b6477290a714d356e822",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "^5 || ^6.5"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/getallheaders.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ralph Khattar",
-                    "email": "ralph.khattar@gmail.com"
-                }
-            ],
-            "description": "A polyfill for getallheaders.",
-            "support": {
-                "issues": "https://github.com/ralouphie/getallheaders/issues",
-                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
-            },
-            "time": "2019-03-08T08:55:37+00:00"
         }
     ],
     "aliases": [],
