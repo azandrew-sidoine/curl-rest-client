@@ -33,9 +33,8 @@ class RequestException extends ClientException
 	{
 		# code...
 		parent::__construct($reasonPhrase, $code);
-
 		// Set the request status code to equals the code parameter
-		$this->statusCode = $code;
+		$this->statusCode = $code ? @intval($code) : $code;
 	}
 
 	/**

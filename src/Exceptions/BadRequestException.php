@@ -32,4 +32,14 @@ class BadRequestException extends ClientException
         parent::__construct('Bad Request', $response->getStatus());
         $this->response = $response;
     }
+
+    /**
+     * Returns the request response
+     * 
+     * @return Response 
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
 }

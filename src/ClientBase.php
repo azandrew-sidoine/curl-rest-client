@@ -19,6 +19,7 @@ use Drewlabs\Curl\REST\Exceptions\BadRequestException;
 use Drewlabs\Curl\REST\Exceptions\ClientException;
 use Drewlabs\Curl\REST\Exceptions\RequestException;
 use Drewlabs\Curl\REST\Contracts\JSONBodyBuilder;
+use Drewlabs\Curl\REST\Contracts\ClientInterface;
 
 trait ClientBase
 {
@@ -67,7 +68,7 @@ trait ClientBase
 	 * $client = $client->setMethod("DELETE"); // Set the request HTTP verb
 	 * ```
 	 *
-	 * @return self
+	 * @return static|ClientInterface
 	 */
 	public function setMethod(string $method)
 	{
@@ -93,7 +94,7 @@ trait ClientBase
 	 * 
 	 * @param string $path
 	 *
-	 * @return self
+	 * @return static|ClientInterface
 	 */
 	public function setRequestURI(string $path)
 	{
@@ -119,7 +120,7 @@ trait ClientBase
 	 * @param string $name
 	 * @param string $value
 	 *
-	 * @return self
+	 * @return static|ClientInterface
 	 */
 	public function setHeader(string $name, string $value)
 	{
@@ -134,7 +135,7 @@ trait ClientBase
 	 * @param string $name
 	 * @param string $value
 	 *
-	 * @return self
+	 * @return static|ClientInterface
 	 */
 	public function setCookie(string $name, string $value)
 	{
@@ -158,7 +159,7 @@ trait ClientBase
 	 * 
 	 * @param string $token
 	 *
-	 * @return self
+	 * @return static|ClientInterface
 	 */
 	public function withBearerToken(string $token)
 	{
@@ -183,7 +184,7 @@ trait ClientBase
 	 * @param string $user
 	 * @param string $password
 	 *
-	 * @return self
+	 * @return static|ClientInterface
 	 */
 	public function withBasicAuth(string $user, string $password)
 	{
@@ -208,7 +209,7 @@ trait ClientBase
 	 * 
 	 * @param array $query
 	 *
-	 * @return self
+	 * @return static|ClientInterface
 	 */
 	public function setQuery(array $query)
 	{
