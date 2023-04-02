@@ -1,0 +1,7 @@
+# Changelog
+
+## v0.1.30 [2023-04-02]
+
+- Added missing getResponse() interface to BadRequestException class
+- Added ClientInterface interface as feature update
+- Updated ClientBase interfaces return types
