@@ -5,3 +5,7 @@
 - Added missing getResponse() interface to BadRequestException class
 - Added ClientInterface interface as feature update
 - Updated ClientBase interfaces return types
+
+## v0.1.31 [2023-04-03]
+
+- Makes setMethod() and setRequestURI() immutable
