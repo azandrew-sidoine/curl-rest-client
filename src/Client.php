@@ -50,81 +50,46 @@ class Client implements ClientInterface
 	public function post(string $url, $body, array $options = [])
 	{
 		# code...
-		$this->setMethod('POST');
-		$this->setRequestURI($url);
-		$this->prepareRequest($options);
-		return $this->sendRequest($body);
+		return $this->setMethod('POST')
+			->setRequestURI($url)
+			->prepareRequest($options)
+			->sendRequest($body);
 	}
 
 	public function put(string $url, $body, array $options = [])
 	{
 		# code...
-		$this->setMethod('PUT');
-		$this->setRequestURI($url);
-		$this->prepareRequest($options ?? []);
-		return $this->sendRequest($body);
+		return $this->setMethod('PUT')
+			->setRequestURI($url)
+			->prepareRequest($options ?? [])
+			->sendRequest($body);
 	}
 
 
 	public function get(string $url, array $options = [])
 	{
 		# code...
-		$this->setMethod('GET');
-		$this->setRequestURI($url);
-		$this->prepareRequest($options);
-		return $this->sendRequest($options['body'] ?? []);
+		return $this->setMethod('GET')
+			->setRequestURI($url)
+			->prepareRequest($options)
+			->sendRequest($options['body'] ?? []);
 	}
 
 	public function delete(string $url, array $options = [])
 	{
 		# code...
-		$this->setMethod('DELETE');
-		$this->setRequestURI($url);
-		$this->prepareRequest($options);
-		// In case of GET & DELETE requests, body can be passed as option to the request
-		return $this->sendRequest($options['body'] ?? []);
+		return $this->setMethod('DELETE')
+			->setRequestURI($url)
+			->prepareRequest($options)
+			->sendRequest($options['body'] ?? []);
 	}
 
 	public function patch(string $url, $body, array $options = [])
 	{
 		# code...
-		$this->setMethod('PATCH');
-		$this->setRequestURI($url);
-		$this->prepareRequest($options);
-		return $this->sendRequest($body);
-	}
-
-	/**
-	 * Perpare request with user custom request options
-	 * 
-	 * @param array $options
-	 * @return void 
-	 */
-	private function prepareRequest(array $options = [])
-	{
-		$this->setQuery($options['params'] ?? $options['query'] ?? []);
-		// Set request headers
-		foreach ($options['headers'] ?? [] as $key => $value) {
-			$this->setHeader($key, $value);
-		}
-		// Set request cookies
-		foreach ($options['cookies'] ?? [] as $key => $value) {
-			$this->setCookie($key, $value);
-		}
-		if (isset($options['verifypeer']) && (false === $options['verifypeer'])) {
-			$this->curl->disableSSLVerification();
-		}
-
-		if (isset($options['timeout']) && is_numeric($options['timeout'])) {
-			$this->curl->timeout(intval($options['timeout']) * 1000);
-		}
-
-		if (isset($options['redirect']) && (0 !== $options['redirect'])) {
-			$this->curl->followLocation();
-			$redirect = intval($options['redirect']);
-			if ($redirect !== -1) {
-				$this->curl->maxRedirects($redirect);
-			}
-		}
+		return $this->setMethod('PATCH')
+			->setRequestURI($url)
+			->prepareRequest($options)
+			->sendRequest($body);
 	}
 }

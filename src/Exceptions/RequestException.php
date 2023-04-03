@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace Drewlabs\Curl\REST\Exceptions;
 
-
 class RequestException extends ClientException
 {
 

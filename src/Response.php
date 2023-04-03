@@ -89,7 +89,6 @@ final class Response
 	/**
 	 * Returns the actual response body
 	 * 
-	 *
 	 * @return array|object
 	 */
 	public function getBody()

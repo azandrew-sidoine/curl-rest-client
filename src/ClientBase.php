@@ -72,9 +72,9 @@ trait ClientBase
 	 */
 	public function setMethod(string $method)
 	{
-		# code...
-		$this->method = $method;
-		return $this;
+		$self = clone $this;
+		$self->method = $method;
+		return $self;
 	}
 
 	/**
@@ -94,13 +94,13 @@ trait ClientBase
 	 * 
 	 * @param string $path
 	 *
-	 * @return static|ClientInterface
+	 * @return self|ClientInterface
 	 */
 	public function setRequestURI(string $path)
 	{
-		# code...
-		$this->path = $path;
-		return $this;
+		$self = clone $this;
+		$self->path = $path;
+		return $self;
 	}
 
 	/**
@@ -264,9 +264,9 @@ trait ClientBase
 	 */
 	public function __call(string $method, $parameters)
 	{
-		# code...
 		return call_user_func([$this->curl, $method], ...$parameters);
 	}
+
 	/**
 	 * {@inheritDoc}
 	 * 
@@ -412,5 +412,40 @@ trait ClientBase
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Perpare request with user custom request options
+	 * 
+	 * @param array $options
+	 * @return self 
+	 */
+	private function prepareRequest(array $options = [])
+	{
+		$this->setQuery($options['params'] ?? $options['query'] ?? []);
+		// Set request headers
+		foreach ($options['headers'] ?? [] as $key => $value) {
+			$this->setHeader($key, $value);
+		}
+		// Set request cookies
+		foreach ($options['cookies'] ?? [] as $key => $value) {
+			$this->setCookie($key, $value);
+		}
+		if (isset($options['verifypeer']) && (false === $options['verifypeer'])) {
+			$this->curl->disableSSLVerification();
+		}
+
+		if (isset($options['timeout']) && is_numeric($options['timeout'])) {
+			$this->curl->timeout(intval($options['timeout']) * 1000);
+		}
+
+		if (isset($options['redirect']) && (0 !== $options['redirect'])) {
+			$this->curl->followLocation();
+			$redirect = intval($options['redirect']);
+			if ($redirect !== -1) {
+				$this->curl->maxRedirects($redirect);
+			}
+		}
+		return $this;
 	}
 }
