@@ -12,22 +12,22 @@ declare(strict_types=1);
 
 namespace Drewlabs\Curl\REST\Exceptions;
 
-use Drewlabs\Curl\REST\Response;
+use Drewlabs\Curl\REST\Contracts\ResponseInterface;
 
 class BadRequestException extends ClientException
 {
     /**
      * 
-     * @var Response
+     * @var ResponseInterface
      */
     private $response;
 
     /**
      * Creates exception class instance
      * 
-     * @param Response $response 
+     * @param ResponseInterface $response 
      */
-    public function __construct(Response $response)
+    public function __construct(ResponseInterface $response)
     {
         parent::__construct('Bad Request', $response->getStatus());
         $this->response = $response;
@@ -36,7 +36,7 @@ class BadRequestException extends ClientException
     /**
      * Returns the request response
      * 
-     * @return Response 
+     * @return ResponseInterface 
      */
     public function getResponse()
     {
