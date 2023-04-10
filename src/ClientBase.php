@@ -331,7 +331,7 @@ trait ClientBase
 	private function appendQuery(string $path)
 	{
 		$query = $this->getQuery();
-		return sprintf("%s%s", $path, implode('&', array_map(function ($key, $value) {
+		return sprintf("%s?%s", rtrim($path, '?'), implode('&', array_map(function ($key, $value) {
 			return urlencode(strval($key)) . '=' . urlencode(strval($value));
 		}, array_keys((array)$query), array_values((array)$query))));
 	}
