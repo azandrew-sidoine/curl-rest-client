@@ -9,3 +9,7 @@
 ## v0.1.31 [2023-04-03]
 
 - Makes setMethod() and setRequestURI() immutable
+
+## v0.1.32 [2023-04-10]
+
+- bug fix in ClientBase::appendQuerymethod declaration
