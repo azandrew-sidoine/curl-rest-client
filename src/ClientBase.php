@@ -302,7 +302,7 @@ trait ClientBase
 		$responseHeaders = $this->parseResponseHeaders($this->curl->getResponseHeaders());
 		if ($statusCode >= 400 && $statusCode <= 499) {
 			$decoded = $this->decodeRequestResponse($response, $responseHeaders);
-			throw new BadRequestException(new BaseResponse($decoded, $statusCode, $responseHeaders));
+			throw new BadRequestException(new BaseResponse(empty($decoded) ? $response : $decoded, $statusCode, $responseHeaders));
 		}
 
 		// Case the request ins not between 200 and 299, throw a request exception
