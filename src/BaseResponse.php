@@ -20,7 +20,7 @@ final class BaseResponse implements ResponseInterface
 	/**
 	 * Response actual value
 	 * 
-	 * @var array|object
+	 * @var array|object|string
 	 */
 	private $body = null;
 
@@ -35,14 +35,14 @@ final class BaseResponse implements ResponseInterface
 	{
 		$this->body = $data ?? '';
 		$this->status = intval($code);
-		$this->headers = $headers ?? [];
+		$this->headers = $this->normalizeHeaders($headers ?? []);
 		$this->reasonPhrase = ReasonPhrase::getPrase($code);
 	}
 
 	/**
 	 * Returns the actual response body
 	 * 
-	 * @return string|mixed
+	 * @return array|object|string|null
 	 */
 	public function getBody()
 	{

@@ -20,7 +20,7 @@ class Response implements ResponseInterface
     /**
      * Response actual value
      * 
-     * @var array|object
+     * @var array
      */
     private $json = null;
 
@@ -35,7 +35,7 @@ class Response implements ResponseInterface
     {
         $this->json = (array)($data ?? []);
         $this->status = $statusCode;
-        $this->headers = $headers ?? [];
+		$this->headers = $this->normalizeHeaders($headers ?? []);
         $this->reasonPhrase = ReasonPhrase::getPrase($statusCode);
     }
 
@@ -48,28 +48,11 @@ class Response implements ResponseInterface
      */
     public function get(string $name)
     {
-        # code...
-        if (false !== strpos($name, '.')) {
-            $keys = explode('.', $name);
-            $count = count($keys);
-            $index = 0;
-            $current = $this->json;
-            while ($index < $count) {
-                # code...
-                if (null === $current) {
-                    return null;
-                }
-                $current = array_key_exists($keys[$index], $current) ? $current[$keys[$index]] : $current[$keys[$index]] ?? null;
-                $index += 1;
-            }
-            return $current;
-        }
-        return array_key_exists($name, $this->json ?? []) ? $this->json[$name] : null;
+        return $this->arrayGet($this->json ?? [], $name);
     }
 
     public function getBody()
     {
-        # code...
         return $this->json;
     }
 
@@ -77,11 +60,10 @@ class Response implements ResponseInterface
      * Get json property value
      * 
      *
-     * @return array|object
+     * @return array
      */
     public function getJson()
     {
-        # code...
         return $this->json;
     }
 }

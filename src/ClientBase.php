@@ -279,6 +279,7 @@ trait ClientBase
 		# code...
 		$this->curl->setOption(\CURLOPT_RETURNTRANSFER, true);
 		$this->curl->setProtocolVersion('1.1');
+		$this->curl->setOption(CURLOPT_ENCODING, "");
 		// #region Send the request to the external server
 		$this->curl->send(
 			$this->method,

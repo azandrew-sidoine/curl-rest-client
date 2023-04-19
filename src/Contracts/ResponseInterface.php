@@ -31,9 +31,17 @@ interface ResponseInterface
 	 * Get headers property value
 	 * 
 	 *
-	 * @return array
+	 * @return array<string,string[]|string>
 	 */
 	public function getHeaders();
+
+	/**
+	 * Returns the header value matching the provided $name
+	 * 
+	 * @param string $name 
+	 * @return string|null 
+	 */
+	public function getHeader(string $name);
 
 	/**
 	 * Get reasonPhrase property value

@@ -40,7 +40,8 @@ class Client implements ClientInterface
 	 * Creates class instance
 	 * 
 	 * @param array $options 
-	 * @return Client 
+	 * 
+	 * @return self 
 	 */
 	public static function new(array $options = [])
 	{
