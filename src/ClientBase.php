@@ -68,7 +68,7 @@ trait ClientBase
 	 * $client = $client->setMethod("DELETE"); // Set the request HTTP verb
 	 * ```
 	 *
-	 * @return static|ClientInterface
+	 * @return self&ClientInterface
 	 */
 	public function setMethod(string $method)
 	{
@@ -94,7 +94,7 @@ trait ClientBase
 	 * 
 	 * @param string $path
 	 *
-	 * @return static|ClientInterface
+	 * @return self&ClientInterface
 	 */
 	public function setRequestURI(string $path)
 	{
@@ -120,7 +120,7 @@ trait ClientBase
 	 * @param string $name
 	 * @param string $value
 	 *
-	 * @return static|ClientInterface
+	 * @return self&ClientInterface
 	 */
 	public function setHeader(string $name, string $value)
 	{
@@ -159,7 +159,7 @@ trait ClientBase
 	 * 
 	 * @param string $token
 	 *
-	 * @return static|ClientInterface
+	 * @return self&ClientInterface
 	 */
 	public function withBearerToken(string $token)
 	{
@@ -184,7 +184,7 @@ trait ClientBase
 	 * @param string $user
 	 * @param string $password
 	 *
-	 * @return static|ClientInterface
+	 * @return self&ClientInterface
 	 */
 	public function withBasicAuth(string $user, string $password)
 	{
@@ -209,7 +209,7 @@ trait ClientBase
 	 * 
 	 * @param array $query
 	 *
-	 * @return static|ClientInterface
+	 * @return self&ClientInterface
 	 */
 	public function setQuery(array $query)
 	{

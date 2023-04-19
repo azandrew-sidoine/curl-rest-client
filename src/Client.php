@@ -97,7 +97,7 @@ class Client implements ClientInterface
 	 * 
 	 * @return static 
 	 */
-	private function prepareRequest(array $options = [])
+	public function prepareRequest(array $options = [])
 	{
 		$this->setQuery($options['params'] ?? $options['query'] ?? []);
 		// Set request headers options

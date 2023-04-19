@@ -212,6 +212,7 @@ interface ClientInterface
      * Send the request to backend server
 	 * 
 	 * @param array|JSONBodyBuilder|\Closure(Response $response):mixed $body
+     * 
 	 * @param \Closure(Response $response):mixed $callback
 	 *
 	 * @return Response|mixed
