@@ -19,7 +19,6 @@ use Drewlabs\Curl\REST\Response;
 
 interface ClientInterface
 {
-
     /**
      * Send HTTP request with `POST` verb
      * 
@@ -208,4 +207,14 @@ interface ClientInterface
      * @throws RequestException 
      */
     public function patch(string $url, $body, array $options = []);
+
+    /**
+     * Send the request to backend server
+	 * 
+	 * @param array|JSONBodyBuilder|\Closure(Response $response):mixed $body
+	 * @param \Closure(Response $response):mixed $callback
+	 *
+	 * @return Response|mixed
+	 */
+	public function sendRequest($body = null, \Closure $callback = null);
 }

@@ -94,7 +94,7 @@ trait ClientBase
 	 * 
 	 * @param string $path
 	 *
-	 * @return self|ClientInterface
+	 * @return static|ClientInterface
 	 */
 	public function setRequestURI(string $path)
 	{
@@ -220,9 +220,8 @@ trait ClientBase
 
 	/**
 	 * Returns request headers
-	 * 
 	 *
-	 * @return array
+	 * @return array<string,string|string[]>
 	 */
 	public function getHeaders()
 	{
@@ -232,9 +231,8 @@ trait ClientBase
 
 	/**
 	 * Returns request cookies
-	 * 
 	 *
-	 * @return array
+	 * @return array<string,string|string[]>
 	 */
 	public function getCookies()
 	{
@@ -285,10 +283,7 @@ trait ClientBase
 		$this->curl->send(
 			$this->method,
 			$this->appendQuery($this->path),
-			array_merge([
-				'headers' => $this->mergeRequestHeaders(),
-				'cookies' => $this->getCookies()
-			], $body ? ['body' => is_array($body) ? $body : $body->json()] : [])
+			array_merge(['headers' => $this->mergeRequestHeaders(), 'cookies' => $this->getCookies()], $body ? ['body' => is_array($body) ? $body : $body->json()] : [])
 		);
 		// #endregion Send request to the external server
 
@@ -307,6 +302,8 @@ trait ClientBase
 
 		// Case the request ins not between 200 and 299, throw a request exception
 		if (!(200 >= $statusCode &&  $statusCode <= 299)) {
+			print_r(['status_code' => $statusCode]);
+			die();
 			throw new RequestException(empty(trim($errorMessage)) ? ReasonPhrase::getPrase($statusCode) : $errorMessage, $statusCode);
 		}
 
@@ -412,40 +409,5 @@ trait ClientBase
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * Perpare request with user custom request options
-	 * 
-	 * @param array $options
-	 * @return self 
-	 */
-	private function prepareRequest(array $options = [])
-	{
-		$this->setQuery($options['params'] ?? $options['query'] ?? []);
-		// Set request headers
-		foreach ($options['headers'] ?? [] as $key => $value) {
-			$this->setHeader($key, $value);
-		}
-		// Set request cookies
-		foreach ($options['cookies'] ?? [] as $key => $value) {
-			$this->setCookie($key, $value);
-		}
-		if (isset($options['verifypeer']) && (false === $options['verifypeer'])) {
-			$this->curl->disableSSLVerification();
-		}
-
-		if (isset($options['timeout']) && is_numeric($options['timeout'])) {
-			$this->curl->timeout(intval($options['timeout']) * 1000);
-		}
-
-		if (isset($options['redirect']) && (0 !== $options['redirect'])) {
-			$this->curl->followLocation();
-			$redirect = intval($options['redirect']);
-			if ($redirect !== -1) {
-				$this->curl->maxRedirects($redirect);
-			}
-		}
-		return $this;
 	}
 }

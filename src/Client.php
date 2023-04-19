@@ -50,46 +50,83 @@ class Client implements ClientInterface
 	public function post(string $url, $body, array $options = [])
 	{
 		# code...
-		return $this->setMethod('POST')
+		return $this->prepareRequest($options)
+			->setMethod('POST')
 			->setRequestURI($url)
-			->prepareRequest($options)
 			->sendRequest($body);
 	}
 
 	public function put(string $url, $body, array $options = [])
 	{
 		# code...
-		return $this->setMethod('PUT')
+		return $this->prepareRequest($options ?? [])
+			->setMethod('PUT')
 			->setRequestURI($url)
-			->prepareRequest($options ?? [])
 			->sendRequest($body);
 	}
 
 
 	public function get(string $url, array $options = [])
 	{
-		# code...
-		return $this->setMethod('GET')
+		return $this->prepareRequest($options)
+			->setMethod('GET')
 			->setRequestURI($url)
-			->prepareRequest($options)
 			->sendRequest($options['body'] ?? []);
 	}
 
 	public function delete(string $url, array $options = [])
 	{
-		# code...
-		return $this->setMethod('DELETE')
+		return $this->prepareRequest($options)
+			->setMethod('DELETE')
 			->setRequestURI($url)
-			->prepareRequest($options)
 			->sendRequest($options['body'] ?? []);
 	}
 
 	public function patch(string $url, $body, array $options = [])
 	{
-		# code...
-		return $this->setMethod('PATCH')
+		return $this->prepareRequest($options)
+			->setMethod('PATCH')
 			->setRequestURI($url)
-			->prepareRequest($options)
 			->sendRequest($body);
+	}
+
+	/**
+	 * Perpare request with user custom request options
+	 * 
+	 * @param array $options
+	 * 
+	 * @return static 
+	 */
+	private function prepareRequest(array $options = [])
+	{
+		$this->setQuery($options['params'] ?? $options['query'] ?? []);
+		// Set request headers options
+		foreach ($options['headers'] ?? [] as $key => $value) {
+			$this->setHeader($key, $value);
+		}
+		// Set request cookies options
+		foreach ($options['cookies'] ?? [] as $key => $value) {
+			$this->setCookie($key, $value);
+		}
+
+		// Set the host peer verification
+		if (isset($options['verifypeer']) && (false === $options['verifypeer'])) {
+			$this->curl->disableSSLVerification();
+		}
+
+		// Set the request timeout option
+		if (isset($options['timeout']) && is_numeric($options['timeout'])) {
+			$this->curl->timeout(intval($options['timeout']) * 1000);
+		}
+
+		// Set the request redirect option
+		if (isset($options['redirect']) && (0 !== $options['redirect'])) {
+			$this->curl->followLocation();
+			$redirect = intval($options['redirect']);
+			if ($redirect !== -1) {
+				$this->curl->maxRedirects($redirect);
+			}
+		}
+		return $this;
 	}
 }
