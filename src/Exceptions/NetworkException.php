@@ -12,9 +12,7 @@ declare(strict_types=1);
 
 namespace Drewlabs\Curl\REST\Exceptions;
 
-use Exception;
-
-class NetworkException extends Exception
+class NetworkException extends ClientException
 {
 
 	/**
