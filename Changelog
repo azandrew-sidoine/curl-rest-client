@@ -21,3 +21,7 @@
 ## v0.2.6 [2023-04-19]
 
 - Added a get header and header normalization implementation to response object
+
+## v0.2.6 [2023-04-19]
+
+- Makes NetworkException a subclass of ClientException
