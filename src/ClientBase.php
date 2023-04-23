@@ -303,8 +303,6 @@ trait ClientBase
 
 		// Case the request ins not between 200 and 299, throw a request exception
 		if (!(200 >= $statusCode &&  $statusCode <= 299)) {
-			print_r(['status_code' => $statusCode]);
-			die();
 			throw new RequestException(empty(trim($errorMessage)) ? ReasonPhrase::getPrase($statusCode) : $errorMessage, $statusCode);
 		}
 
