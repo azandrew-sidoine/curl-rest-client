@@ -25,3 +25,7 @@
 ## v0.2.6 [2023-04-19]
 
 - Makes NetworkException a subclass of ClientException
+
+## v0.4.0 [2024-06-24]
+
+- Added support for curl client version 0.4.0

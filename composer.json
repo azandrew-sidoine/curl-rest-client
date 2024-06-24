@@ -15,12 +15,16 @@
         }
     ],
     "prefer-stable": true,
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "drewlabs/curl-client": "^0.3.0"
+        "drewlabs/curl-client": "^0.3.0|^0.4.0"
     },
     "require-dev": {
         "donatj/mock-webserver": "^2.6",
         "phpunit/phpunit": ">=6.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
     }
 }
