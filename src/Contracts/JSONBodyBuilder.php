@@ -16,7 +16,6 @@ interface JSONBodyBuilder
 
 	/**
 	 * Rerturns the json representation of the builder instance
-	 * 
 	 *
 	 * @return array|mixed
 	 */

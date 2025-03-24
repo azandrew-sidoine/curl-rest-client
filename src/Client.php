@@ -19,10 +19,7 @@ class Client implements ClientInterface
 {
 	use ClientBase;
 
-	/**
-	 * 
-	 * @var Client
-	 */
+	/** @var Client  */
 	private $curl;
 
 	/**

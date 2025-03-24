@@ -8,6 +8,11 @@
             "Drewlabs\\Curl\\REST\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Drewlabs\\Curl\\REST\\Tests\\": "src/"
+        }
+    },
     "authors": [
         {
             "name": "azandrew-sidoine",

@@ -23,36 +23,24 @@ use Drewlabs\Curl\REST\Contracts\ClientInterface;
 
 trait ClientBase
 {
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $path = null;
 
 
-	/**
-	 * @var string
+	/** @var string
 	 */
 	private $method = 'GET';
 
-	/**
-	 * 
-	 * @var CurlClient
-	 */
+	/**  @var CurlClient */
 	private $curl;
 
-	/**
-	 * @var array
-	 */
+	/**  @var array */
 	private $__HEADERS__ = [];
 
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $__COOKIES__ = [];
 
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $__QUERIES__ = [];
 
 	/**
@@ -273,7 +261,7 @@ trait ClientBase
 	 *
 	 * @return Response|mixed
 	 */
-	public function sendRequest($body = null, Closure $callback = null)
+	public function sendRequest($body = null, ?Closure $callback = null)
 	{
 		list($body, $callback) = isset($body) && $body instanceof \Closure ? [null, $body] : [$body, $callback];
 		# code...

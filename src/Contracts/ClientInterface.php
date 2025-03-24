@@ -217,5 +217,5 @@ interface ClientInterface
 	 *
 	 * @return Response|mixed
 	 */
-	public function sendRequest($body = null, \Closure $callback = null);
+	public function sendRequest($body = null, ?\Closure $callback = null);
 }

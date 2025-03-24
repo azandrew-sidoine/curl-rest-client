@@ -6,25 +6,13 @@ use InvalidArgumentException;
 
 trait Response
 {
-	/**
-	 * Response status code
-	 * 
-	 * @var int
-	 */
+	/** @var int Response status code */
 	private $status = null;
 
-	/**
-	 * Response headers
-	 * 
-	 * @var array
-	 */
+	/**  @var array Response headers */
 	private $headers = [];
 
-	/**
-	 * Response reason pharase
-	 * 
-	 * @var string
-	 */
+	/** @var string Response reason pharase */
 	private $reasonPhrase = null;
 
 	public function getStatus()

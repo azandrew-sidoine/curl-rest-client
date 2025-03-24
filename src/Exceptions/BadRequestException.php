@@ -16,10 +16,7 @@ use Drewlabs\Curl\REST\Contracts\ResponseInterface;
 
 class BadRequestException extends ClientException
 {
-    /**
-     * 
-     * @var ResponseInterface
-     */
+    /** @var ResponseInterface */
     private $response;
 
     /**

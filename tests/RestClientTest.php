@@ -1,5 +1,8 @@
 <?php
 
+namespace Drewlabs\Curl\REST\Tests;
+
+
 use donatj\MockWebServer\DelayedResponse;
 // use donatj\MockWebServer\Exceptions\RuntimeException;
 // use donatj\MockWebServer\Exceptions\ServerException;

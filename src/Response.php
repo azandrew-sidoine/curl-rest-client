@@ -17,11 +17,7 @@ class Response implements ResponseInterface
 {
     use ConcernsResponse;
 
-    /**
-     * Response actual value
-     * 
-     * @var array
-     */
+    /** @var array Response actual value */
     private $json = null;
 
     /**

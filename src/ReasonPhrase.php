@@ -12,9 +12,7 @@ namespace Drewlabs\Curl\REST;
 
 class ReasonPhrase
 {
-    /**
-     * @var array<int,string>
-     */
+    /** @var array<int,string> */
     const PHRASES = [
         100 => 'Continue',
         101 => 'Switching Protocols',

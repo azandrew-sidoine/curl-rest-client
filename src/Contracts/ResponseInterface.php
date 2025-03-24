@@ -14,7 +14,6 @@ interface ResponseInterface
 {
 	/**
 	 * Get status property value
-	 * 
 	 *
 	 * @return int
 	 */
@@ -29,7 +28,6 @@ interface ResponseInterface
 
 	/**
 	 * Get headers property value
-	 * 
 	 *
 	 * @return array<string,string[]|string>
 	 */
@@ -45,7 +43,6 @@ interface ResponseInterface
 
 	/**
 	 * Get reasonPhrase property value
-	 * 
 	 *
 	 * @return string
 	 */

@@ -15,11 +15,7 @@ namespace Drewlabs\Curl\REST\Exceptions;
 class RequestException extends ClientException
 {
 
-	/**
-	 * Request status code
-	 * 
-	 * @var int
-	 */
+	/** @var int Request status code */
 	private $statusCode = null;
 
 	/**
