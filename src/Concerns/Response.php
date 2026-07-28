@@ -15,6 +15,17 @@ trait Response
 	/** @var string Response reason pharase */
 	private $reasonPhrase = null;
 
+	/**
+	 * returns true if request ends with ok http code
+	 * 
+	 * @return bool 
+	 */
+	public function ok()
+	{
+		return $this->status >= 200 && $this->status < 300;
+	}
+
+
 	public function getStatus()
 	{
 		# code...

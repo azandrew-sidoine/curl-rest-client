@@ -17,7 +17,7 @@ class Response implements ResponseInterface
 {
     use ConcernsResponse;
 
-    /** @var array Response actual value */
+    /** @var array response actual value */
     private $json = null;
 
     /**
@@ -36,7 +36,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * Return a property key / attribute from the response body
+     * returns a property key / attribute from the response body
      * 
      * @param string $name
      *
@@ -53,7 +53,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * Get json property value
+     * get json property value
      * 
      *
      * @return array

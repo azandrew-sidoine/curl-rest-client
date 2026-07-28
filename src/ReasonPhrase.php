@@ -77,7 +77,7 @@ class ReasonPhrase
     ];
 
     /**
-     * Returns the response phrase matching a given status code
+     * returns the response phrase matching a given status code
      * 
      * @param int $code 
      * @return string 

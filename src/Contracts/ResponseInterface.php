@@ -13,28 +13,28 @@ namespace Drewlabs\Curl\REST\Contracts;
 interface ResponseInterface
 {
 	/**
-	 * Get status property value
+	 * get status property value
 	 *
 	 * @return int
 	 */
 	public function getStatus();
 
 	/**
-	 * Returns the response status text
+	 * returns the response status text
 	 * 
 	 * @return string 
 	 */
 	public function getStatusText();
 
 	/**
-	 * Get headers property value
+	 * get headers property value
 	 *
 	 * @return array<string,string[]|string>
 	 */
 	public function getHeaders();
 
 	/**
-	 * Returns the header value matching the provided $name
+	 * returns the header value matching the provided $name
 	 * 
 	 * @param string $name 
 	 * @return string|null 
@@ -42,14 +42,14 @@ interface ResponseInterface
 	public function getHeader(string $name);
 
 	/**
-	 * Get reasonPhrase property value
+	 * get reasonPhrase property value
 	 *
 	 * @return string
 	 */
 	public function getReasonPhrase();
 
 	/**
-	 * Returns the actual response body
+	 * returns the actual response body
 	 * 
 	 * @return mixed
 	 */

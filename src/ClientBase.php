@@ -26,7 +26,6 @@ trait ClientBase
 	/** @var string */
 	private $path = null;
 
-
 	/** @var string
 	 */
 	private $method = 'GET';
@@ -132,8 +131,16 @@ trait ClientBase
 		return $this;
 	}
 
+
+	public function asForm()
+	{
+		$self = clone $this;
+
+		return $self->setHeader('Content-Type', 'multipart/form-data');
+	}
+
 	/**
-	 * Add bearer token authorization header to request
+	 * add bearer token authorization header to request
 	 * 
 	 * **Note** Creates a copy of the request client adding `Authorization: Bearer <TOKEN>` header
 	 * 
@@ -157,7 +164,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Add Basic authorization header to request
+	 * add Basic authorization header to request
 	 * 
 	 * **Note** Creates a copy of the request client adding `Authorization: Basic <TOKEN>` header
 	 * 
@@ -182,7 +189,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Add request query
+	 * add request query
 	 * 
 	 * ```php
 	 * <?php
@@ -207,7 +214,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Returns request headers
+	 * returns request headers
 	 *
 	 * @return array<string,string|string[]>
 	 */
@@ -218,7 +225,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Returns request cookies
+	 * returns request cookies
 	 *
 	 * @return array<string,string|string[]>
 	 */
@@ -229,8 +236,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Returns request query
-	 * 
+	 * returns request query
 	 *
 	 * @return array
 	 */
@@ -241,7 +247,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Provides a proxy interface to the internal curl client
+	 * provides a proxy interface to the internal curl client
 	 * 
 	 * @param string $method
 	 * @param mixed $parameters
@@ -264,24 +270,22 @@ trait ClientBase
 	public function sendRequest($body = null, ?Closure $callback = null)
 	{
 		list($body, $callback) = isset($body) && $body instanceof \Closure ? [null, $body] : [$body, $callback];
-		# code...
+
 		$this->curl->setOption(\CURLOPT_RETURNTRANSFER, true);
 		$this->curl->setProtocolVersion('1.1');
 		$this->curl->setOption(CURLOPT_ENCODING, "");
-		// #region Send the request to the external server
+
 		$this->curl->send(
 			$this->method,
 			$this->appendQuery($this->path),
 			array_merge(['headers' => $this->mergeRequestHeaders(), 'cookies' => $this->getCookies()], $body ? ['body' => is_array($body) ? $body : $body->json()] : [])
 		);
-		// #endregion Send request to the external server
 
-		// #region Handle request response
 		$response = $this->curl->getResponse();
 		if (!empty(trim($errorMessage = $this->curl->getErrorMessage()) || (0 !== $this->curl->getError()))) {
 			throw new ClientException('Client request Error: ' . ($errorMessage ?? 'Unkkown error'));
 		}
-		// # Get the request response status code to evaluate for bad response
+
 		$statusCode = intval($this->curl->getStatusCode());
 		$responseHeaders = $this->parseResponseHeaders($this->curl->getResponseHeaders());
 		if ($statusCode >= 400 && $statusCode <= 499) {
@@ -289,25 +293,21 @@ trait ClientBase
 			throw new BadRequestException(new BaseResponse(empty($decoded) ? $response : $decoded, $statusCode, $responseHeaders));
 		}
 
-		// Case the request ins not between 200 and 299, throw a request exception
 		if (!(200 >= $statusCode &&  $statusCode <= 299)) {
 			throw new RequestException(empty(trim($errorMessage)) ? ReasonPhrase::getPrase($statusCode) : $errorMessage, $statusCode);
 		}
 
-		// TODO : return the response to caller
 		$callback = $callback ?? function ($value) {
 			return $value;
 		};
-		// Decode response before sending it to the client
-		$decoded = $this->decodeRequestResponse($response, $responseHeaders);
-		// #endregion Handle request response
 
-		// Call the provided callback at the end of the execution stack
+		$decoded = $this->decodeRequestResponse($response, $responseHeaders);
+
 		return $callback(new Response($decoded, $statusCode, $responseHeaders));
 	}
 
 	/**
-	 * Prepare request uri appending request url encoded query parameters
+	 * prepare request uri appending request url encoded query parameters
 	 * 
 	 * @param string $path 
 	 * @return string 
@@ -321,32 +321,31 @@ trait ClientBase
 	}
 
 	/**
-	 * Merge request header with default json headers
+	 * merge request header with default json headers
 	 * 
 	 * @return string[] 
 	 */
 	private function mergeRequestHeaders()
 	{
-		$defaultHeaders = ['Content-Type' => 'application/json', 'Accept' => '*/*'];
-		return array_merge($defaultHeaders, $this->getHeaders());
+		$headers = ['Content-Type' => 'application/json', 'Accept' => '*/*'];
+		return array_merge($headers, $this->getHeaders());
 	}
 
 	/**
-	 * Decode request response
+	 * decode request response
 	 * 
 	 * @param string $response 
 	 * @param array $headers 
 	 * @return array|mixed
 	 * 
-	 * @throws JsonException 
+	 * @throws \JsonException 
 	 */
 	private function decodeRequestResponse(string $response, array $headers = [])
 	{
 		if (false !== preg_match('/^(?:application|text)\/(?:[a-z]+(?:[\.-][0-9a-z]+){0,}[\+\.]|x-)?json(?:-[a-z]+)?/i', $this->getHeader($headers, 'content-type'))) {
 			return (array)((new JSONDecoder)->decode($response));
 		}
-		// If the Content-Type header is not present in the response headers, we apply the try catch clause
-		// To insure no error is thrown when decoding.
+
 		try {
 			return (array)((new JSONDecoder)->decode($response) ?? []);
 		} catch (\Throwable $e) {
@@ -355,7 +354,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Parse request string headers
+	 * parse request string headers
 	 * 
 	 * @param mixed $list 
 	 * 
@@ -378,7 +377,7 @@ trait ClientBase
 	}
 
 	/**
-	 * Get request header caseless
+	 * get request header caseless
 	 * 
 	 * @param array $headers 
 	 * @param string $name 
@@ -389,9 +388,11 @@ trait ClientBase
 		if (empty($headers)) {
 			return null;
 		}
-		$normalized = strtolower($name);
+
+		$lower = strtolower($name);
+
 		foreach ($headers as $key => $header) {
-			if (strtolower($key) === $normalized) {
+			if (strtolower($key) === $lower) {
 				return implode(',', is_array($header) ? $header : [$header]);
 			}
 		}

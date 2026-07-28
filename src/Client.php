@@ -15,7 +15,7 @@ namespace Drewlabs\Curl\REST;
 use Drewlabs\Curl\Client as CurlClient;
 use Drewlabs\Curl\REST\Contracts\ClientInterface;
 
-class Client implements ClientInterface
+final class Client implements ClientInterface
 {
 	use ClientBase;
 
@@ -23,7 +23,7 @@ class Client implements ClientInterface
 	private $curl;
 
 	/**
-	 * Creates the curl REST client instance
+	 * creates the curl REST client instance
 	 * 
 	 * @return void 
 	 */
@@ -34,20 +34,31 @@ class Client implements ClientInterface
 
 
 	/**
-	 * Creates class instance
+	 * creates class instance
 	 * 
 	 * @param array $options 
 	 * 
-	 * @return self 
+	 * @return static 
 	 */
 	public static function new(array $options = [])
 	{
-		return new self($options);
+		return new static($options);
+	}
+
+
+	/**
+	 * creates a client with the base url set
+	 * 
+	 * @param string $url 
+	 * @return static 
+	 */
+	public static function baseUrl(string $url)
+	{
+		return new static(['base_url' => $url]);
 	}
 
 	public function post(string $url, $body, array $options = [])
 	{
-		# code...
 		return $this->prepareRequest($options)
 			->setMethod('POST')
 			->setRequestURI($url)
@@ -56,7 +67,6 @@ class Client implements ClientInterface
 
 	public function put(string $url, $body, array $options = [])
 	{
-		# code...
 		return $this->prepareRequest($options ?? [])
 			->setMethod('PUT')
 			->setRequestURI($url)
@@ -89,7 +99,7 @@ class Client implements ClientInterface
 	}
 
 	/**
-	 * Perpare request with user custom request options
+	 * prepare request with user custom request options
 	 * 
 	 * @param array $options
 	 * 
@@ -98,26 +108,23 @@ class Client implements ClientInterface
 	public function prepareRequest(array $options = [])
 	{
 		$this->setQuery($options['params'] ?? $options['query'] ?? []);
-		// Set request headers options
+
 		foreach ($options['headers'] ?? [] as $key => $value) {
 			$this->setHeader($key, $value);
 		}
-		// Set request cookies options
+
 		foreach ($options['cookies'] ?? [] as $key => $value) {
 			$this->setCookie($key, $value);
 		}
 
-		// Set the host peer verification
 		if (isset($options['verifypeer']) && (false === $options['verifypeer'])) {
 			$this->curl->disableSSLVerification();
 		}
 
-		// Set the request timeout option
 		if (isset($options['timeout']) && is_numeric($options['timeout'])) {
 			$this->curl->timeout(intval($options['timeout']) * 1000);
 		}
 
-		// Set the request redirect option
 		if (isset($options['redirect']) && (0 !== $options['redirect'])) {
 			$this->curl->followLocation();
 			$redirect = intval($options['redirect']);
@@ -125,6 +132,7 @@ class Client implements ClientInterface
 				$this->curl->maxRedirects($redirect);
 			}
 		}
+
 		return $this;
 	}
 }
