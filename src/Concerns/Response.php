@@ -28,7 +28,6 @@ trait Response
 
 	public function getStatus()
 	{
-		# code...
 		return $this->status;
 	}
 
@@ -49,13 +48,11 @@ trait Response
 
 	public function getHeaders()
 	{
-		# code...
 		return $this->headers ?? [];
 	}
 
 	public function getReasonPhrase()
 	{
-		# code...
 		return $this->reasonPhrase ?? 'Unknown';
 	}
 
@@ -65,7 +62,7 @@ trait Response
 	}
 
 	/**
-	 * Normalize response headers to match http standards
+	 * normalize response headers to match http standards
 	 * 
 	 * @param array $headers 
 	 * @return array 

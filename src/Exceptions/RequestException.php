@@ -15,25 +15,25 @@ namespace Drewlabs\Curl\REST\Exceptions;
 class RequestException extends ClientException
 {
 
-	/** @var int Request status code */
+	/** @var int request status code */
 	private $statusCode = null;
 
 	/**
-	 * Create exception instance
+	 * creates exception instance
 	 * 
 	 * @param string $reasonPhrase
+	 * 
 	 * @param int $code
 	 */
 	public function __construct(string $reasonPhrase = "Unknown Error", int $code = 500)
 	{
-		# code...
 		parent::__construct($reasonPhrase, $code);
-		// Set the request status code to equals the code parameter
+
 		$this->statusCode = $code ? @intval($code) : $code;
 	}
 
 	/**
-	 * Returns the request exception status code
+	 * returns the request exception status code
 	 *
 	 * @return int
 	 */

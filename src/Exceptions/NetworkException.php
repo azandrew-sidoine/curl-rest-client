@@ -16,7 +16,7 @@ class NetworkException extends ClientException
 {
 
 	/**
-	 * Create exception instance
+	 * creates exception instance
 	 * 
 	 * @param string $message
 	 * @param int $errorCode

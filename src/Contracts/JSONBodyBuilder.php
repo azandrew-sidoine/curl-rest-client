@@ -13,7 +13,6 @@ namespace Drewlabs\Curl\REST\Contracts;
 
 interface JSONBodyBuilder
 {
-
 	/**
 	 * returns the json representation of the builder instance
 	 *

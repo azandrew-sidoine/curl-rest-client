@@ -131,12 +131,41 @@ trait ClientBase
 		return $this;
 	}
 
-
+	/**
+	 * set the request content type to match `application/form-data`
+	 * 
+	 * @return ClientBase&ClientInterface 
+	 */
 	public function asForm()
 	{
 		$self = clone $this;
 
-		return $self->setHeader('Content-Type', 'multipart/form-data');
+		return $self->setHeader('content-type', 'multipart/form-data');
+	}
+
+
+	/**
+	 * set the request content type to match `application/x-www-form-urlencoded`
+	 * 
+	 * @return ClientBase&ClientInterface 
+	 */
+	public function asUrlEncoded()
+	{
+		$self = clone $this;
+
+		return $self->setHeader('content-type', 'application/x-www-form-urlencoded');
+	}
+
+	/**
+	 * set the request content type to match `application/json`
+	 * 
+	 * @return ClientBase&ClientInterface 
+	 */
+	public function asJson()
+	{
+		$self = clone $this;
+
+		return $self->setHeader('content-type', 'application/json');
 	}
 
 	/**
@@ -158,8 +187,8 @@ trait ClientBase
 	 */
 	public function withBearerToken(string $token)
 	{
-		# code...
 		$self = clone $this;
+
 		return $self->setHeader("Authorization", "Bearer $token");
 	}
 
@@ -183,8 +212,8 @@ trait ClientBase
 	 */
 	public function withBasicAuth(string $user, string $password)
 	{
-		# code...
 		$self = clone $this;
+
 		return $self->setHeader("Authorization", "Basic " . base64_encode(sprintf("%s:%s", $user, $password)));
 	}
 
@@ -208,8 +237,8 @@ trait ClientBase
 	 */
 	public function setQuery(array $query)
 	{
-		# code...
 		$this->__QUERIES__ = $query;
+
 		return $this;
 	}
 
@@ -220,7 +249,6 @@ trait ClientBase
 	 */
 	public function getHeaders()
 	{
-		# code...
 		return $this->__HEADERS__ ?? [];
 	}
 
@@ -231,7 +259,6 @@ trait ClientBase
 	 */
 	public function getCookies()
 	{
-		# code...
 		return $this->__COOKIES__ ?? [];
 	}
 
@@ -242,7 +269,6 @@ trait ClientBase
 	 */
 	public function getQuery()
 	{
-		# code...
 		return $this->__QUERIES__ ?? [];
 	}
 
@@ -286,15 +312,15 @@ trait ClientBase
 			throw new ClientException('Client request Error: ' . ($errorMessage ?? 'Unkkown error'));
 		}
 
-		$statusCode = intval($this->curl->getStatusCode());
+		$httpCode = intval($this->curl->getStatusCode());
 		$responseHeaders = $this->parseResponseHeaders($this->curl->getResponseHeaders());
-		if ($statusCode >= 400 && $statusCode <= 499) {
+		if ($httpCode >= 400 && $httpCode <= 499) {
 			$decoded = $this->decodeRequestResponse($response, $responseHeaders);
-			throw new BadRequestException(new BaseResponse(empty($decoded) ? $response : $decoded, $statusCode, $responseHeaders));
+			throw new BadRequestException(new BaseResponse(empty($decoded) ? $response : $decoded, $httpCode, $responseHeaders));
 		}
 
-		if (!(200 >= $statusCode &&  $statusCode <= 299)) {
-			throw new RequestException(empty(trim($errorMessage)) ? ReasonPhrase::getPrase($statusCode) : $errorMessage, $statusCode);
+		if (!(200 >= $httpCode &&  $httpCode <= 299)) {
+			throw new RequestException(empty(trim($errorMessage)) ? ReasonPhrase::getPrase($httpCode) : $errorMessage, $httpCode);
 		}
 
 		$callback = $callback ?? function ($value) {
@@ -303,7 +329,7 @@ trait ClientBase
 
 		$decoded = $this->decodeRequestResponse($response, $responseHeaders);
 
-		return $callback(new Response($decoded, $statusCode, $responseHeaders));
+		return $callback(new Response($decoded, $httpCode, $responseHeaders));
 	}
 
 	/**

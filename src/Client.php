@@ -45,7 +45,6 @@ final class Client implements ClientInterface
 		return new static($options);
 	}
 
-
 	/**
 	 * creates a client with the base url set
 	 * 

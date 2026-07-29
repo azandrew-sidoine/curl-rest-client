@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "drewlabs/curl-client",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/azandrew-sidoine/drewlabs-curl-client.git",
-                "reference": "fc8a84f334086027c7e23eacbcb14951f2388871"
+                "reference": "eabe2157ae6b9ffdc9ce38c627fe510b75ab2f4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/azandrew-sidoine/drewlabs-curl-client/zipball/fc8a84f334086027c7e23eacbcb14951f2388871",
-                "reference": "fc8a84f334086027c7e23eacbcb14951f2388871",
+                "url": "https://api.github.com/repos/azandrew-sidoine/drewlabs-curl-client/zipball/eabe2157ae6b9ffdc9ce38c627fe510b75ab2f4d",
+                "reference": "eabe2157ae6b9ffdc9ce38c627fe510b75ab2f4d",
                 "shasum": ""
             },
             "require": {
@@ -51,9 +51,9 @@
             ],
             "support": {
                 "issues": "https://github.com/azandrew-sidoine/drewlabs-curl-client/issues",
-                "source": "https://github.com/azandrew-sidoine/drewlabs-curl-client/tree/v0.4.2"
+                "source": "https://github.com/azandrew-sidoine/drewlabs-curl-client/tree/v0.4.3"
             },
-            "time": "2026-03-13T15:48:43+00:00"
+            "time": "2026-07-28T23:48:59+00:00"
         }
     ],
     "packages-dev": [

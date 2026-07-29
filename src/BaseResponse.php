@@ -18,7 +18,7 @@ final class BaseResponse implements ResponseInterface
 	use ConcernsResponse;
 
 	/**
-	 * Response actual value
+	 * response actual value
 	 * 
 	 * @var array|object|string
 	 */

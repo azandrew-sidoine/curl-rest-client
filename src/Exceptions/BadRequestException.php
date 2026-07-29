@@ -20,7 +20,7 @@ class BadRequestException extends ClientException
     private $response;
 
     /**
-     * Creates exception class instance
+     * creates exception class instance
      * 
      * @param ResponseInterface $response 
      */
@@ -31,7 +31,7 @@ class BadRequestException extends ClientException
     }
 
     /**
-     * Returns the request response
+     * returns the request response
      * 
      * @return ResponseInterface 
      */
