@@ -111,7 +111,6 @@ trait ClientBase
 	 */
 	public function setHeader(string $name, string $value)
 	{
-		# code...
 		$this->__HEADERS__[$name] = $value;
 		return $this;
 	}
@@ -354,7 +353,7 @@ trait ClientBase
 	private function mergeRequestHeaders()
 	{
 		$headers = ['Content-Type' => 'application/json', 'Accept' => '*/*'];
-		return array_merge($headers, $this->getHeaders());
+		return array_merge($this->normalizeHeaders($headers), $this->normalizeHeaders($this->getHeaders()));
 	}
 
 	/**
@@ -423,5 +422,15 @@ trait ClientBase
 			}
 		}
 		return null;
+	}
+
+	private function normalizeHeaders(array $headers)
+	{
+		$output = [];
+		foreach ($headers as $key => $header) {
+			$output[strtolower($key)] = implode(',', \is_array($header) ? $header : [$header]);
+		}
+
+		return $output;
 	}
 }
